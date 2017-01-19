@@ -34,6 +34,6 @@ int	mouse_stuff(int button, int x, int y, void *param)
 	mlx_clear_window(win_ptr->mlx, win_ptr->win);
 	c = (t_point){4.0 * (float)x / (float)WINWIDTH - 2.0,
 				-4.0 * (float)y / (float)WINHEIGHT + 2.0};
-	display_julia(c, win_ptr->mlx, win_ptr->win);
+	display_julia(c, win_ptr);
 	return (0);
 }
