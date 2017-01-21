@@ -6,8 +6,9 @@ ENDFLAGS = -framework OpenGL -framework AppKit
 
 NAME = fractol
 
-SRCS = main.c key_stuff.c gradient.c \
-	 arithmetic.c julia.c \
+SRCS = main.c ft_putstr.c ft_strcmp.c ft_putchar.c \
+	key_stuff.c gradient.c drawing.c \
+	arithmetic.c julia.c mandelbrot.c burning_ship.c
 
 OBJ = $(SRCS:.c=.o)
 

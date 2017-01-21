@@ -24,17 +24,44 @@ int	key_stuff(int keycode, void *param)
 	return (0);
 }
 
-int	mouse_stuff(int button, int x, int y, void *param)
+int	mouse_stuff_julia(int button, int x, int y, void *param)
 {
-	t_window	*win_ptr;
-	t_point		c;
+	t_window		*win_ptr;
+	static t_point	c = (t_point){0,0};
+
+	win_ptr = (t_window *)param;
+	mlx_clear_window(win_ptr->mlx, win_ptr->win);
+	if (button == 1 && win_ptr->zoom == 1.0)
+		c = scale_pt_to_window(x, y, win_ptr);
+	else
+		win_ptr->center = scale_pt_to_window(x, y, win_ptr);
+	win_ptr->zoom *= 0.875;
+	display_julia(c, win_ptr);
+	return (0);
+}
+
+int	mouse_stuff_mandelbrot(int button, int x, int y, void *param)
+{
+	t_window		*win_ptr;
 
 	(void)button;
 	win_ptr = (t_window *)param;
 	mlx_clear_window(win_ptr->mlx, win_ptr->win);
-	c = (t_point){4.0 * (float)x / (float)WINWIDTH - 2.0,
-				-4.0 * (float)y / (float)WINHEIGHT + 2.0};
-	win_ptr->zoom *= 0.9;
-	display_julia(c, win_ptr);
+	win_ptr->center = scale_pt_to_window(x, y, win_ptr);
+	win_ptr->zoom *= 0.875;
+	display_mandelbrot(win_ptr);
+	return (0);
+}
+
+int	mouse_stuff_burning_ship(int button, int x, int y, void *param)
+{
+	t_window		*win_ptr;
+
+	(void)button;
+	win_ptr = (t_window *)param;
+	mlx_clear_window(win_ptr->mlx, win_ptr->win);
+	win_ptr->center = scale_pt_to_window(x, y, win_ptr);
+	win_ptr->zoom *= 0.875;
+	display_burning_ship(win_ptr);
 	return (0);
 }

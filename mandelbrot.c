@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgrimes <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/12 21:20:06 by mgrimes           #+#    #+#             */
-/*   Updated: 2017/01/12 21:20:08 by mgrimes          ###   ########.fr       */
+/*   Created: 2017/01/19 15:18:49 by mgrimes           #+#    #+#             */
+/*   Updated: 2017/01/19 15:18:51 by mgrimes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	display_julia(t_point c, t_window *win_ptr)
+void	display_mandelbrot(t_window *win_ptr)
 {
 	int		x;
 	int		y;
@@ -31,7 +31,7 @@ void	display_julia(t_point c, t_window *win_ptr)
 		{
 			init_val = scale_pt_to_window(x, y, win_ptr);
 			image[x + y * WINWIDTH] =
-			gradient(STCOL, ENCOL, iterate_map(init_val, c, max_iterates));
+			gradient(STCOL, ENCOL, iterate_map(init_val, init_val, max_iterates));
 			x++;
 		}
 		y++;

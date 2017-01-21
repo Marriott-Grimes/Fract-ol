@@ -29,13 +29,42 @@ t_window struct_init(void)
 	return (wndow);
 }
 
-int main()
+void	dem_lines_lol(t_window wndow, char **argv)
+{
+	if (argv[1][0] == 'j')
+	{
+		display_julia((t_point){0, 0}, &wndow);
+		mlx_key_hook(wndow.win, key_stuff, &wndow);
+		mlx_mouse_hook(wndow.win, mouse_stuff_julia, &wndow);
+		mlx_loop(wndow.mlx);
+	}
+	if (argv[1][0] == 'm')
+	{
+		display_mandelbrot(&wndow);
+		mlx_key_hook(wndow.win, key_stuff, &wndow);
+		mlx_mouse_hook(wndow.win, mouse_stuff_mandelbrot, &wndow);
+		mlx_loop(wndow.mlx);
+	}
+	if (argv[1][0] == 'b')
+	{
+		display_burning_ship(&wndow);
+		mlx_key_hook(wndow.win, key_stuff, &wndow);
+		mlx_mouse_hook(wndow.win, mouse_stuff_burning_ship, &wndow);
+		mlx_loop(wndow.mlx);
+	}
+}
+
+int main(int argc, char **argv)
 {
 	t_window	wndow;
 
+	if (argc != 2)
+	{
+		ft_putstr(
+		"USAGE: ./fractol [fractal name]\nmandelbrot, julia, burning ship\n");
+		return (0);
+	}
 	wndow = struct_init();
-	mlx_key_hook(wndow.win, key_stuff, &wndow);
-	mlx_mouse_hook(wndow.win, mouse_stuff, &wndow);
-	mlx_loop(wndow.mlx);
+	dem_lines_lol(wndow, argv);
 	return (0);
 }
