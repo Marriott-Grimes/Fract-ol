@@ -14,8 +14,8 @@
 
 float	iterate_burning_ship(t_point init_val, t_point c, int max_iterates)
 {
-	int i;
-	t_point absed;
+	int		i;
+	t_point	absed;
 
 	i = 0;
 	while (modulus_squared(init_val) < 8 && i < max_iterates)

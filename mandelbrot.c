@@ -31,7 +31,8 @@ void	display_mandelbrot(t_window *win_ptr)
 		{
 			init_val = scale_pt_to_window(x, y, win_ptr);
 			image[x + y * WINWIDTH] =
-			gradient(STCOL, ENCOL, iterate_map(init_val, init_val, max_iterates));
+			gradient(STCOL, ENCOL,
+				iterate_map(init_val, init_val, max_iterates));
 			x++;
 		}
 		y++;

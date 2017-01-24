@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-t_window struct_init(void)
+t_window	struct_init(void)
 {
 	t_window	wndow;
 
@@ -20,6 +20,7 @@ t_window struct_init(void)
 	wndow.win = mlx_new_window(wndow.mlx, WINWIDTH, WINHEIGHT, "fract_lol");
 	wndow.buf = mlx_new_image(wndow.mlx, WINWIDTH, WINHEIGHT);
 	wndow.center = (t_point){0, 0};
+	wndow.c = (t_point){0, 0};
 	wndow.zoom = 1.0;
 	wndow.wwd = WINWIDTH;
 	wndow.wht = WINHEIGHT;
@@ -29,11 +30,12 @@ t_window struct_init(void)
 	return (wndow);
 }
 
-void	dem_lines_lol(t_window wndow, char **argv)
+void		dem_lines_lol(t_window wndow, char **argv)
 {
 	if (argv[1][0] == 'j')
 	{
-		display_julia((t_point){0, 0}, &wndow);
+		display_julia(wndow.c, &wndow);
+		mlx_hook(wndow.win, 6, 1L << 6, motion_stuff, &wndow);
 		mlx_key_hook(wndow.win, key_stuff, &wndow);
 		mlx_mouse_hook(wndow.win, mouse_stuff_julia, &wndow);
 		mlx_loop(wndow.mlx);
@@ -54,7 +56,7 @@ void	dem_lines_lol(t_window wndow, char **argv)
 	}
 }
 
-int main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_window	wndow;
 
